@@ -7,7 +7,7 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/FuzzyInferenceSystem/FuzzyInferenceSystem.csproj",
+				"${workspaceFolder}/build.proj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
