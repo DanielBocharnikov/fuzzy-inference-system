@@ -11,12 +11,12 @@
         return false;
       }
 
-      if (GetType() != obj.GetType()) {
-        return false;
-      }
-
       if (ReferenceEquals(this, obj)) {
         return true;
+      }
+
+      if (GetType() != obj.GetType()) {
+        return false;
       }
 
       if ((obj as Entity<TId>)?.IsTransient() == true || IsTransient()) {
