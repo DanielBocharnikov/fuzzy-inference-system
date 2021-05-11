@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FuzzyInferenceSystem.Domain\FuzzyInferenceSystem.Domain.csproj" />
+    <ProjectReference Include="..\FuzzyInferenceSystem\FuzzyInferenceSystem.csproj" />
   </ItemGroup>
 
 </Project>
