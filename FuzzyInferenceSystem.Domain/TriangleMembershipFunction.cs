@@ -23,7 +23,7 @@ namespace FuzzyInferenceSystem.Domain {
 
       if (center < leftEdge || center > rightEdge) {
         throw new ArgumentOutOfRangeException(nameof(center),
-          $"The value {center} must be greater or equal to left edge or less or equal to right edge. " +
+          "The center must be greater or equal to left edge and less or equal to right edge. " +
           $"Current values: left edge = {leftEdge}, center = {center}, right edge = {rightEdge}.");
       }
 
