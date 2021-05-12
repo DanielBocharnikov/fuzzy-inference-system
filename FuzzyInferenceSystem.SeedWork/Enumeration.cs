@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace FuzzyInferenceSystem.SeedWork {
-  public abstract class Enumeration:IComparable {
-
+namespace FuzzyInferenceSystem.SeedWork
+{
+  public abstract class Enumeration : IComparable
+  {
     public static int AbsoluteDifference(Enumeration firstValue, Enumeration secondValue)
       => Math.Abs(firstValue.Id - secondValue.Id);
 
@@ -15,7 +16,8 @@ namespace FuzzyInferenceSystem.SeedWork {
     public static T FromDisplayName<T>(string displayName) where T : Enumeration
       => Parse<T, string>(displayName, "display name", item => item.Name == displayName);
 
-    private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration {
+    private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration
+    {
       T matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
       return matchingItem
@@ -36,8 +38,10 @@ namespace FuzzyInferenceSystem.SeedWork {
         .Select(field => field.GetValue(null))
         .Cast<T>();
 
-    public override bool Equals(object obj) {
-      if (obj is not Enumeration otherValue) {
+    public override bool Equals(object obj)
+    {
+      if (obj is not Enumeration otherValue)
+      {
         return false;
       }
 
