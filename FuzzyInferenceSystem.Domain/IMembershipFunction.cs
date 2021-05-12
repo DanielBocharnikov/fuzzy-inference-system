@@ -2,6 +2,6 @@
 {
   public interface IMembershipFunction
   {
-    double GetDegreeOfMembershipFor(double domainValue);
+    double MapDegreeOfMembershipFor(double domainValue);
   }
 }

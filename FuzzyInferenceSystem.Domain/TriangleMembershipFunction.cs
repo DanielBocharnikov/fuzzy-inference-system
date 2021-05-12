@@ -13,7 +13,7 @@ namespace FuzzyInferenceSystem.Domain
 
     public double RightEdge { get; init; }
 
-    public TriangleMembershipFunction(double leftEdge, double center, double rightEdge)
+    public static TriangleMembershipFunction Create(double leftEdge, double center, double rightEdge)
     {
       if (leftEdge > rightEdge || rightEdge < leftEdge)
       {
@@ -29,30 +29,32 @@ namespace FuzzyInferenceSystem.Domain
           $"Current values: left edge = {leftEdge}, center = {center}, right edge = {rightEdge}.");
       }
 
-      (LeftEdge, Center, RightEdge) = (leftEdge, center, rightEdge);
+      return new TriangleMembershipFunction(leftEdge, center, rightEdge);
     }
 
-    public double GetDegreeOfMembershipFor(double domainValue)
+    private TriangleMembershipFunction(double leftEdge, double center, double rightEdge) => (LeftEdge, Center, RightEdge) = (leftEdge, center, rightEdge);
+
+    public double MapDegreeOfMembershipFor(double domainValue)
     {
       if (Center == LeftEdge)
       {
         return Math.Max((RightEdge - domainValue) / (RightEdge - Center), 0);
       }
-      else if (Center == RightEdge)
+
+      if (Center == RightEdge)
       {
         return Math.Max((domainValue - LeftEdge) / (Center - LeftEdge), 0);
       }
-      else if ((Center - LeftEdge) == (RightEdge - Center))
+
+      if ((Center - LeftEdge) == (RightEdge - Center))
       {
         double distanceFromCenter = RightEdge - Center;
         int logicalValue = (domainValue >= LeftEdge && domainValue < RightEdge) ? 1 : 0;
         return logicalValue * (distanceFromCenter - Math.Abs(domainValue - Center)) / distanceFromCenter;
       }
-      else
-      {
-        double grade = Math.Max(Math.Min((domainValue - LeftEdge) / (Center - LeftEdge), (RightEdge - domainValue) / (RightEdge - Center)), 0);
-        return Math.Round(grade, 2);
-      }
+
+      double grade = Math.Max(Math.Min((domainValue - LeftEdge) / (Center - LeftEdge), (RightEdge - domainValue) / (RightEdge - Center)), 0);
+      return Math.Round(grade, 2);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

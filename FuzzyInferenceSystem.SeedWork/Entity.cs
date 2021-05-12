@@ -1,4 +1,6 @@
-﻿namespace FuzzyInferenceSystem.SeedWork
+﻿using System.Collections.Generic;
+
+namespace FuzzyInferenceSystem.SeedWork
 {
   public abstract class Entity<TId> where TId : ValueObject
   {
@@ -10,7 +12,7 @@
 
     public override bool Equals(object obj)
     {
-      if (obj is null || !(obj is Entity<TId>))
+      if (obj is null or not Entity<TId>)
       {
         return false;
       }
