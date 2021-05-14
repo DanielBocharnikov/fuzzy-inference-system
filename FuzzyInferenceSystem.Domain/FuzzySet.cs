@@ -3,19 +3,20 @@ using System.Collections.Generic;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public class FuzzySet<TValue>
+  public class FuzzySet<TDomainValue>
   {
-    private readonly List<TValue> _domain = new();
-    private readonly List<double> _degreesOfMembership = new();
+    private readonly List<TDomainValue> _domain = new();
 
-    public Guid Id { get; private set; }
+    private readonly List<double> _gradesOfMembership = new();
 
-    public string Name { get; private set; }
+    public Guid Id { get; private set; } = Guid.Empty;
 
-    public string Description { get; private set; }
+    public string LinguisticValue { get; private set; } = string.Empty;
 
-    public IEnumerable<TValue> Domain => _domain;
+    public string Description { get; private set; } = string.Empty;
 
-    public IEnumerable<double> DegreesOfMembership => _degreesOfMembership;
+    public IEnumerable<TDomainValue> Domain => _domain;
+
+    public IEnumerable<double> GradesOfMembership => _gradesOfMembership;
   }
 }
