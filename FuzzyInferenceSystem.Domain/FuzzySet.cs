@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public class FuzzySet<TDomainValue>
+  public class FuzzySet<T> where T : notnull
   {
-    private readonly List<TDomainValue> _domain = new();
+    public string LinguisticValue { get; private set; }
 
-    private readonly List<double> _gradesOfMembership = new();
+    public string Description { get; private set; }
 
-    public Guid Id { get; private set; } = Guid.Empty;
+    public int Power { get; private set; }
 
-    public string LinguisticValue { get; private set; } = string.Empty;
+    public FuzzySet<T> ApplyAlphaCut(double value)
+      => throw new NotImplementedException();
 
-    public string Description { get; private set; } = string.Empty;
+    public FuzzySet<T> ToUniversal()
+      => throw new NotImplementedException();
 
-    public IEnumerable<TDomainValue> Domain => _domain;
+    public bool IsEmpty()
+      => _mapping.Count == 0
+      || !_mapping.Any(element => element.degreeOfMembership > 0);
 
-    public IEnumerable<double> GradesOfMembership => _gradesOfMembership;
+    private List<(double degreeOfMembership, T domainElement)> _mapping = new();
   }
 }
