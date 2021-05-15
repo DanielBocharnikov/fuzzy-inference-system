@@ -18,9 +18,18 @@ namespace FuzzyInferenceSystem.Domain
     public FuzzySet<T> ToUniversal()
       => throw new NotImplementedException();
 
+    public FuzzySet<T> ToEmpty()
+  => throw new NotImplementedException();
+
     public bool IsEmpty()
-      => _mapping.Count == 0
-      || !_mapping.Any(element => element.degreeOfMembership > 0);
+      => !_mapping.Any(element => element.degreeOfMembership > 0);
+
+    public bool IsUniversal()
+      => !_mapping.Any(element => element.degreeOfMembership < 1);
+
+    public bool IsNormal()
+      => _mapping.Any(element => element.degreeOfMembership == 1)
+      && _mapping.Any(element => element.degreeOfMembership == 0);
 
     private List<(double degreeOfMembership, T domainElement)> _mapping = new();
   }
