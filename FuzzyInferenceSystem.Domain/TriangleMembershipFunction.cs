@@ -5,7 +5,7 @@ using FuzzyInferenceSystem.SeedWork;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public class TriangleMembershipFunction : ValueObject, IMembershipFunction
+  public sealed class TriangleMembershipFunction : ValueObject, IMembershipFunction
   {
     public double LeftEdge { get; init; }
 
