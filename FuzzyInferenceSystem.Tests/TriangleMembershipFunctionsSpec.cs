@@ -11,21 +11,21 @@ namespace FuzzyInferenceSystem.Tests
 {
   public class TriangleMembershipFunctionsSpec
   {
-    private readonly TriangleMembershipFunction _firstTriangleMembership
+    private readonly TriangleFunction _firstTriangleMembership
       = CreateTriangleWith(-6.0, -1.0, 4.0);
-    private readonly TriangleMembershipFunction _secondTriangleMembership
+    private readonly TriangleFunction _secondTriangleMembership
       = CreateTriangleWith(-6.0, -1.0, 4.0);
 
     [Fact]
     public void With_correct_arguments_should_be_created()
     {
-      Func<TriangleMembershipFunction> mfCreation = ()
+      Func<TriangleFunction> mfCreation = ()
         => CreateTriangleWith(-6.0, -1.0, 4.0);
 
       mfCreation.Should().NotThrow<ArgumentOutOfRangeException>();
       mfCreation.Should().NotThrow<ArgumentException>();
 
-      TriangleMembershipFunction mf = mfCreation();
+      TriangleFunction mf = mfCreation();
       mf.LeftEdge.Should().Be(-6.0);
       mf.Center.Should().Be(-1.0);
       mf.RightEdge.Should().Be(4.0);
@@ -145,7 +145,7 @@ namespace FuzzyInferenceSystem.Tests
         .Equal(expectedGradesWhenMembershipIsAsymmetricTriangle);
     }
 
-    private static TriangleMembershipFunction CreateTriangleWith(double leftEdge, double center, double rightEdge)
-      => TriangleMembershipFunction.Create(leftEdge, center, rightEdge);
+    private static TriangleFunction CreateTriangleWith(double leftEdge, double center, double rightEdge)
+      => TriangleFunction.Create(leftEdge, center, rightEdge);
   }
 }

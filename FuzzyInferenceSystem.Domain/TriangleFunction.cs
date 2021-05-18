@@ -5,7 +5,7 @@ using FuzzyInferenceSystem.SeedWork;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public sealed class TriangleMembershipFunction : ValueObject, IMembershipFunction
+  public sealed class TriangleFunction : ValueObject, IMembershipFunction
   {
     public double LeftEdge { get; init; }
 
@@ -13,7 +13,7 @@ namespace FuzzyInferenceSystem.Domain
 
     public double RightEdge { get; init; }
 
-    public static TriangleMembershipFunction Create(double leftEdge, double center, double rightEdge)
+    public static TriangleFunction Create(double leftEdge, double center, double rightEdge)
     {
       if (leftEdge > rightEdge || rightEdge < leftEdge)
       {
@@ -29,10 +29,10 @@ namespace FuzzyInferenceSystem.Domain
           $"Current values: left edge = {leftEdge}, center = {center}, right edge = {rightEdge}.");
       }
 
-      return new TriangleMembershipFunction(leftEdge, center, rightEdge);
+      return new TriangleFunction(leftEdge, center, rightEdge);
     }
 
-    private TriangleMembershipFunction(double leftEdge, double center, double rightEdge) => (LeftEdge, Center, RightEdge) = (leftEdge, center, rightEdge);
+    private TriangleFunction(double leftEdge, double center, double rightEdge) => (LeftEdge, Center, RightEdge) = (leftEdge, center, rightEdge);
 
     public double MapDegreeOfMembershipFor(double domainValue)
     {
