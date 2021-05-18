@@ -27,51 +27,24 @@ namespace FuzzyInferenceSystem.Domain
 
     public double MapDegreeOfMembershipFor(double domainValue)
     {
-      return _lineType.MapDegreeOfMembershipFor(domainValue, _leftEdge, _rightEdge);
-    }
-
-    public abstract class LineFunctionType : Enumeration
-    {
-      public static readonly LineFunctionType Increasing = new IncreasingLineFunctionType();
-      public static readonly LineFunctionType Decreasing = new DecreasingLineFunctionType();
-
-      private LineFunctionType(int value, string displayName) : base(value, displayName)
+      if (domainValue <= _leftEdge)
       {
+        return 0;
       }
 
-      public abstract double MapDegreeOfMembershipFor(double domainValue, double leftEdge, double rightEdge);
-
-      private class IncreasingLineFunctionType : LineFunctionType
+      if (domainValue > _rightEdge)
       {
-        public IncreasingLineFunctionType() : base(0, "Increasing")
-        {
-        }
-
-        public override double MapDegreeOfMembershipFor(double domainValue, double leftEdge, double rightEdge)
-        {
-          if (domainValue <= leftEdge)
-          {
-            return 0;
-          }
-
-          if (domainValue > rightEdge)
-          {
-            return 1;
-          }
-
-          return (domainValue - leftEdge) / (rightEdge - leftEdge);
-        }
+        return 1;
       }
 
-      private class DecreasingLineFunctionType : LineFunctionType
-      {
-        public DecreasingLineFunctionType() : base(1, "Decreasing")
-        {
-        }
+      double calculatedDegreeOfMembership = (domainValue - _leftEdge) / (_rightEdge - _leftEdge);
 
-        public override double MapDegreeOfMembershipFor(double domainValue, double leftEdge, double rightEdge)
-          => 1 - Increasing.MapDegreeOfMembershipFor(domainValue, leftEdge, rightEdge);
+      if (_lineType.Equals(LineFunctionType.Decreasing))
+      {
+        return 1 - calculatedDegreeOfMembership;
       }
+
+      return calculatedDegreeOfMembership;
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

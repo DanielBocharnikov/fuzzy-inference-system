@@ -4,8 +4,8 @@ namespace FuzzyInferenceSystem.Domain
 {
   public abstract class AlphaCutType : Enumeration
   {
-    public static readonly AlphaCutType Strong = new StrongType();
-    public static readonly AlphaCutType Weak = new WeakType();
+    public static AlphaCutType Strong { get; } = new StrongType();
+    public static AlphaCutType Weak { get; } = new WeakType();
 
     private AlphaCutType(int value, string displayName) : base(value, displayName)
     {
