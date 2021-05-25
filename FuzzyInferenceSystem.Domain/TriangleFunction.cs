@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using FuzzyInferenceSystem.SeedWork;
+using FuzzyInferenceSystem.SeedWork.DDD;
 
 namespace FuzzyInferenceSystem.Domain
 {

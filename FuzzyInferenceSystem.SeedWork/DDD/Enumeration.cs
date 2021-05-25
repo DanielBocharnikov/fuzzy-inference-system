@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace FuzzyInferenceSystem.SeedWork
+namespace FuzzyInferenceSystem.SeedWork.DDD
 {
   public abstract class Enumeration : IComparable
   {

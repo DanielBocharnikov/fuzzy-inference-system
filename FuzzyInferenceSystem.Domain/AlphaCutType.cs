@@ -1,4 +1,4 @@
-﻿using FuzzyInferenceSystem.SeedWork;
+﻿using FuzzyInferenceSystem.SeedWork.DDD;
 
 namespace FuzzyInferenceSystem.Domain
 {

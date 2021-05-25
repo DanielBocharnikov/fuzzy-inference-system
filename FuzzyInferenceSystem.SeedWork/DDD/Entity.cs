@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FuzzyInferenceSystem.SeedWork
+﻿namespace FuzzyInferenceSystem.SeedWork.DDD
 {
   public abstract class Entity<TId> where TId : ValueObject
   {
@@ -55,7 +53,7 @@ namespace FuzzyInferenceSystem.SeedWork
     }
 
     public static bool operator ==(Entity<TId> left, Entity<TId> right)
-      => (left is null) ? right is null : left.Equals(right);
+      => left is null ? right is null : left.Equals(right);
 
     public static bool operator !=(Entity<TId> left, Entity<TId> right)
       => !(left == right);

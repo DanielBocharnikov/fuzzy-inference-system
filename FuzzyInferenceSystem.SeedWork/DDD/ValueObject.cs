@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace FuzzyInferenceSystem.SeedWork
+namespace FuzzyInferenceSystem.SeedWork.DDD
 {
   public abstract class ValueObject
   {
