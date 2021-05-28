@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using FuzzyInferenceSystem.SeedWork;
 using FuzzyInferenceSystem.SeedWork.DDD;
+using FuzzyInferenceSystem.SeedWork.Extensions;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public class FuzzyConceptDescription : ValueObject
+  public class ConceptDescription : ValueObject
   {
     public string Text { get; }
 
-    public static FuzzyConceptDescription From(string text)
+    public static ConceptDescription From(string text)
     {
       if (text.IsEmpty())
       {
@@ -19,10 +19,10 @@ namespace FuzzyInferenceSystem.Domain
           nameof(text));
       }
 
-      return new FuzzyConceptDescription(text);
+      return new ConceptDescription(text);
     }
 
-    internal FuzzyConceptDescription(string text) => Text = text;
+    internal ConceptDescription(string text) => Text = text;
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

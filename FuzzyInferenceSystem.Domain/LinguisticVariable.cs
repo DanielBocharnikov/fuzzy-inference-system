@@ -7,13 +7,13 @@ namespace FuzzyInferenceSystem.Domain
 {
   public class LinguisticVariable : Entity<LinguisticVariableId>
   {
-    public FuzzySystemId SystemId { get; private set; }
+    public SystemId SystemId { get; private set; }
 
-    public FuzzyConceptName Name { get; private set; }
+    public ConceptName Name { get; private set; }
 
-    public FuzzyConceptDescription Description { get; private set; }
+    public ConceptDescription Description { get; private set; }
 
-    public IReadOnlyList<FuzzyVariable> TermSet { get; private set; } = new List<FuzzyVariable>();
+    public IReadOnlyList<LinguisticValue> TermSet { get; private set; } = new List<LinguisticValue>();
 
     public LinguisticVariable(Action<object> applier) : base(applier)
     {

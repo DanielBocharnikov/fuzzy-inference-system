@@ -6,23 +6,23 @@ using FuzzyInferenceSystem.SeedWork.Extensions;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public class FuzzyConceptName : ValueObject
+  public class ConceptName : ValueObject
   {
     public string Value { get; }
 
-    internal FuzzyConceptName(string value) => Value = value;
+    internal ConceptName(string value) => Value = value;
 
-    public static FuzzyConceptName From(string name)
+    public static ConceptName From(string name)
     {
       if (name.IsEmpty())
       {
         throw new ArgumentException("The name of fuzzy concept must be defined.", nameof(name));
       }
 
-      return new FuzzyConceptName(name);
+      return new ConceptName(name);
     }
 
-    public static implicit operator string(FuzzyConceptName fuzzyConceptName)
+    public static implicit operator string(ConceptName fuzzyConceptName)
       => fuzzyConceptName.Value;
 
     protected override IEnumerable<object> GetEqualityComponents()
