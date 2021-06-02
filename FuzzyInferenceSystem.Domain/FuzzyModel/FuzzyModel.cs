@@ -53,7 +53,7 @@ namespace FuzzyInferenceSystem.Domain.FuzzyModel
 
     protected override void When(object @event)
     {
-      LinguisticVariable lv;
+      LinguisticVariable linguisticVariable;
 
       switch (@event)
       {
@@ -65,18 +65,48 @@ namespace FuzzyInferenceSystem.Domain.FuzzyModel
 
         case Events.FuzzyModelTitleChanged e:
           Title = new FuzzyConceptTitle(e.Title);
+          if (Status.Equals(FuzzyModelStatus.Inactive))
+            Status = FuzzyModelStatus.InProgress;
           break;
 
         case Events.FuzzyModelDescriptionUpdated e:
           Description = new FuzzyConceptDescription(e.Text);
+          if (Status.Equals(FuzzyModelStatus.Inactive))
+            Status = FuzzyModelStatus.InProgress;
           break;
 
         case Events.LinguisticVariableAddedToFuzzyModel e:
-          lv = new LinguisticVariable(Apply);
+          linguisticVariable = new(Apply);
+          ApplyToEntity(linguisticVariable, e);
+          _ports.Add(linguisticVariable);
           break;
       }
     }
 
-    protected override void EnsureValidState() => throw new NotImplementedException();
+    protected override void EnsureValidState()
+    {
+      var valid =
+        Id is not null &&
+        OwnerId is not null &&
+        (Status.Name switch
+        {
+          nameof(FuzzyModelStatus.InProgress) =>
+            Title is not null ||
+            Description is not null ||
+            _ports.Count > 0,
+          nameof(FuzzyModelStatus.Active) =>
+            Title is not null &&
+            Description is not null &&
+            _ports.Any(lv => lv.PortType.Equals(PortType.Input)) &&
+            _ports.Any(lv => lv.PortType.Equals(PortType.Output)),
+          _ => true
+        });
+
+      if (!valid)
+      {
+        throw new DomainExceptions.InvalidEntityState(
+          this, $"Post-checks failed in model status {Status}");
+      }
+    }
   }
 }
