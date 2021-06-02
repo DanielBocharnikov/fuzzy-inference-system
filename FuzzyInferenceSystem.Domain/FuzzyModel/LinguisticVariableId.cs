@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using FuzzyInferenceSystem.SeedWork.DDD;
 
-namespace FuzzyInferenceSystem.Domain
+namespace FuzzyInferenceSystem.Domain.FuzzyModel
 {
   public class LinguisticVariableId : ValueObject
   {

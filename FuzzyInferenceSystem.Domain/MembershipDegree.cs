@@ -5,11 +5,11 @@ using FuzzyInferenceSystem.SeedWork.DDD;
 
 namespace FuzzyInferenceSystem.Domain
 {
-  public class DegreeOfMembership : ValueObject
+  public class MembershipDegree : ValueObject
   {
     public double Value { get; }
 
-    public static DegreeOfMembership For(double value)
+    public static MembershipDegree For(double value)
     {
       if (value is < 0 or > 1)
       {
@@ -18,14 +18,16 @@ namespace FuzzyInferenceSystem.Domain
           nameof(value));
       }
 
-      return new DegreeOfMembership(value);
+      return new MembershipDegree(value);
     }
 
-    internal DegreeOfMembership(double value) => Value = value;
+    internal MembershipDegree(double value) => Value = value;
 
-    public static implicit operator double(DegreeOfMembership self) => self.Value;
+    public static implicit operator double(MembershipDegree self) => self.Value;
 
-    public static implicit operator DegreeOfMembership(double value) => new(value);
+    public static implicit operator MembershipDegree(double value) => new(value);
+
+    public override string ToString() => Value.ToString();
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

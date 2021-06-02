@@ -4,26 +4,28 @@ using System.Collections.Generic;
 using FuzzyInferenceSystem.SeedWork.DDD;
 using FuzzyInferenceSystem.SeedWork.Extensions;
 
-namespace FuzzyInferenceSystem.Domain
+namespace FuzzyInferenceSystem.Domain.FuzzyModel
 {
-  public class ConceptName : ValueObject
+  public class FuzzyConceptTitle : ValueObject
   {
     public string Value { get; }
 
-    internal ConceptName(string value) => Value = value;
+    internal FuzzyConceptTitle(string value) => Value = value;
 
-    public static ConceptName From(string name)
+    public static FuzzyConceptTitle From(string name)
     {
       if (name.IsEmpty())
       {
         throw new ArgumentException("The name of fuzzy concept must be defined.", nameof(name));
       }
 
-      return new ConceptName(name);
+      return new FuzzyConceptTitle(name);
     }
 
-    public static implicit operator string(ConceptName fuzzyConceptName)
+    public static implicit operator string(FuzzyConceptTitle fuzzyConceptName)
       => fuzzyConceptName.Value;
+
+    public override string ToString() => Value;
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
