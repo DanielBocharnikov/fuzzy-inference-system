@@ -48,8 +48,8 @@ namespace FuzzyInferenceSystem.Domain.FuzzyModel
           Guid.NewGuid(),
           title,
           text,
-          type.ToString(),
-          portType.ToString()));
+          type.Name,
+          portType.Name));
 
     protected override void When(object @event)
     {

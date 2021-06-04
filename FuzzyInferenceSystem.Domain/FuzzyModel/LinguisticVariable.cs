@@ -9,7 +9,7 @@ namespace FuzzyInferenceSystem.Domain.FuzzyModel
   {
     public FuzzyModelId ModelId { get; private set; }
 
-    public FuzzyConceptTitle Name { get; private set; }
+    public FuzzyConceptTitle Title { get; private set; }
 
     public FuzzyConceptDescription Description { get; private set; }
 
@@ -21,6 +21,18 @@ namespace FuzzyInferenceSystem.Domain.FuzzyModel
     {
     }
 
-    protected override void When(object @event) => throw new NotImplementedException();
+    protected override void When(object @event)
+    {
+      switch (@event)
+      {
+        case Events.LinguisticVariableAddedToFuzzyModel e:
+          Id = new(e.LinguisticVariableId);
+          ModelId = new(e.ModelId);
+          Title = new(e.Title);
+          Description = new(e.Description);
+          PortType = Enumeration.FromDisplayName<PortType>(e.PortType);
+          break;
+      }
+    }
   }
 }
